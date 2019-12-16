@@ -12,9 +12,10 @@ class Queue:
 
     def enqueue(self, value):
         self.storage.add_to_tail(value)
+        
 
     def dequeue(self):
-        while self.storage.head is not None:
+        if self.storage.head is not None:
             self.storage.remove_from_head()
 
     def len(self):
