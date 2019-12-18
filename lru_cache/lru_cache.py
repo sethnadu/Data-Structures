@@ -9,7 +9,7 @@ class LRUCache:
     order, as well as a storage dict that provides fast access
     to every node stored in the cache.
     """
-    def __init__(self, limit=3):
+    def __init__(self, limit=10):
         self.limit = limit
         self.cache = {}
         self.storage = DoublyLinkedList()
@@ -45,10 +45,12 @@ class LRUCache:
         if key in self.cache:
             self.cache[key] = ListNode(value, key)
             self.storage.move_to_end(self.cache[key])
+
         elif key not in self.cache:
             self.cache.update({key:ListNode(value, key)})
             self.storage.add_to_tail(self.cache[key])
-            if self.storage.length > self.limit:
+            
+            if self.storage.length >= self.limit:
                 key_delete = self.storage.remove_from_head()
                 # print("key delete:", key_delete)
                 del self.cache[key_delete]
