@@ -2,6 +2,7 @@ import sys
 sys.path.append('../doubly_linked_list')
 from doubly_linked_list import DoublyLinkedList
 
+# LIFO Last in First Out
 class Stack:
     # Can only push and pop to end of stack!
     def __init__(self):
