@@ -50,7 +50,7 @@ class LRUCache:
             self.cache.update({key:ListNode(value, key)})
             self.storage.add_to_tail(self.cache[key])
             
-            if self.storage.length >= self.limit:
+            if self.storage.length > self.limit:
                 key_delete = self.storage.remove_from_head()
                 # print("key delete:", key_delete)
                 del self.cache[key_delete]

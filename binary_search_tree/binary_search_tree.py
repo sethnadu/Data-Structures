@@ -60,6 +60,7 @@ class BinarySearchTree:
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
+        # Recursively
         cb(self.value)
         if self.left is not None:
             self.left.for_each(cb)
@@ -67,24 +68,58 @@ class BinarySearchTree:
             self.right.for_each(cb)
         return
 
+        # iteratively
+        # stack = Stack()
+        # stack.push(self)
+
+        # while stack.len() > 0:
+        #     current_node = stack.pop()
+        #     if current_node.right:
+        #         stack.push(current_node.right)
+        #     if current_node.left:
+        #         stack.push(current_node.left)
+        #     cb(current_node.value)
+
+
+
 
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node.left is not None:
+            self.in_order_print(node.left)
+        print(node.value)
+        if node.right is not None:
+            self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        self.results = Queue()
+        self.results.enqueue(node)
+        while self.results.len() is not 0:
+            current_node = self.results.dequeue()
+            if current_node.left is not None:
+                self.results.enqueue(current_node.left)
+            if current_node.right is not None:
+                self.results.enqueue(current_node.right)
+            print(current_node.value)
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
-
+        stack = Stack()
+        stack.push(node)
+        while stack.len() > 0:
+            current_node = stack.pop()
+            if current_node.left is not None:
+                stack.push(current_node.left)
+            if current_node.right is not None:
+                stack.push(current_node.right)
+            print(current_node.value)
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
@@ -97,33 +132,14 @@ class BinarySearchTree:
         pass
 
 
-bst = BinarySearchTree(5)
-# bst.insert(2)
-# bst.insert(3)
-# bst.insert(6)
+# bst = BinarySearchTree(1)
+# bst.insert(8)
+# bst.insert(5)
 # bst.insert(7)
-# bst.insert(10)
-# print(bst.right.right.right.value)
-# print(bst.contains(10))
-# print(bst.contains(8))
+# bst.insert(6)
+# bst.insert(3)
+# bst.insert(4)
+# bst.insert(2)
 
+# bst.bft_print(bst)
 
-arr = []
-cb = lambda x: arr.append(x)
-v1 = random.randint(1, 101)
-v2 = random.randint(1, 101)
-v3 = random.randint(1, 101)
-v4 = random.randint(1, 101)
-v5 = random.randint(1, 101)
-bst.insert(v1)
-bst.insert(v2)
-bst.insert(v3)
-bst.insert(v4)
-bst.insert(v5)
-bst.for_each(cb)
-print('5: ', 5, 5 in arr)
-print('v1: ', v1, v1 in arr)
-print('v2: ', v2, v2 in arr)
-print('v3: ', v3, v3 in arr)
-print('v4: ', v4, v4 in arr)
-print('v5: ', v5, v5 in arr)
